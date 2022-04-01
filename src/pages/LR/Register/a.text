@@ -1,0 +1,26 @@
+      var validateName = (rule, value, callback) => {
+        //校验账号名
+        let pararms={
+          date:this.registerAccount.name,
+          type:'name'
+        }
+        this.$store.dispatch("validate",pararms)
+    };
+      var validateAccount = (rule, value, callback) => {
+        //校验账号
+           let pararms={
+          date:this.registerAccount.account,
+          type:'account'
+        }
+        this.$store.dispatch("validate",pararms)
+    };
+
+         async validate({commit},pararms){
+           let result=await reqGetValidate(pararms.date,pararms.type)
+           if(result.code==200){     
+            return 'ok';
+        }else{
+            return Promise.reject(new Error('faile'));
+        }
+       }
+
