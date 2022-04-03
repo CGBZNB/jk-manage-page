@@ -7,16 +7,11 @@
                 <span class="comment-header-phone-describe">网站联系人：
                     <span class="comment-header-phone">CGB-1506888024@qq.com</span>
                 </span>
-                                <div class="comment-login-1" style="display:inline-block;">
-                    <!--<span id="getdate"></span>-->
-                    <span class="btn-span"><a href="#" @click="toLogin">登录</a></span>
-                    <span class="btn-span"><a href="#" @click="toRegister">注册</a></span>
-                </div>
+
                             </div>
             <div  class="title" @click="goIndex"><h1>驾考管理</h1></div>
             <div class="comment-header-right">
-                <!--<span class="PhoneTargetSpan"></span>-->
-                <!--<img class="comment-header-phone-img" src="" alt="">-->
+        
                 <div class="comment-header-app">
                     <span>手机APP</span>
                     <ul class="down-popup">
@@ -73,9 +68,10 @@ li a:active {
     background-color: #F9F9F9;
  
 }
-.title{
+.header .title{
     float:left; 
-    margin-left:180px;
+  
+    margin-left:240px;
      color: #00C356;
 }
 .comment-header-contact {
@@ -91,50 +87,12 @@ li a:active {
 }
 .comment-header-contact .comment-header-right {
     float: right;
-    padding-right: 8px
+    padding-right: 40px
 }
 
-.comment-header-contact .comment-header-left,.question .question_list ul li {
+.comment-header-contact .comment-header-left{
     float: left;
       margin-left: 30px;
-}
-
-.comment-header-contact .comment-header-left .VTargetSpan {
-    height: 14px;
-    width: 27px;
-    display: inline-block;
-    background: url(http://img.58cdn.com.cn/dist/jxedt/pc/products/jxdetail/images/s.png) 0 -20px no-repeat;
-    background-size: 100%
-}
-
-.comment-header-contact .comment-header-left .comment-login-1 {
-    margin-left: 30px
-}
-
-.comment-header-contact .comment-header-left .comment-login-1 .btn-span {
-    margin: 10px
-}
-
-.comment-header-contact .comment-header-left .comment-login-1 .btn-span a {
-    font-size: 14px;
-    color: #00c356;
-    text-decoration: none
-}
-
-.comment-header-contact .comment-header-left .comment-login-2 {
-    padding-right: 10px
-}
-
-.comment-header-contact .comment-header-left .comment-login-2 .comment-phone a {
-    font-size: 14px;
-    color: #00c356;
-    text-decoration: none
-}
-
-.comment-header-contact .comment-header-left .comment-login-2 .comment-out a {
-    font-size: 14px;
-    color: #999;
-    text-decoration: none
 }
 
 .comment-header-contact .comment-header-phone {
@@ -226,26 +184,7 @@ li a:active {
     padding-right: 10px
 }
 
-.comment-header-contact .comment-header-vip-img {
-    height: 10px;
-    width: 13px
-}
 
-.comment-header-contact .comment-header-vip-describe {
-    text-decoration: none;
-    line-height: 15px;
-    padding-right: 10px
-}
-
-.comment-header-contact .comment-header-vip-describe a {
-    color: #666;
-    font-size: 13px;
-    text-decoration: none
-}
-
-.comment-header-contact .comment-header-vip-describe a:hover {
-    color: #00c356
-}
 
 .comment-header-contact .comment-header-phone-describe {
     font-size: 13px;

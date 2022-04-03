@@ -67,7 +67,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style >
 .car_s_exam {
   padding-bottom: 20px;
   width: 100%;
