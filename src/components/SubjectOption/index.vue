@@ -67,7 +67,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .car_s_exam {
   padding-bottom: 20px;
   width: 100%;
@@ -80,10 +80,12 @@ export default {
 .car_s_exam .car_s_exam_context .title {
   text-align: center;
   font-weight: bold;
+  margin: 0 auto;
   padding: 40px 0;
   font-size: 26px;
   color: #333333;
   line-height: 35px;
+
 }
 .car_s_exam .car_s_exam_context .exam_card {
   text-align: center;
