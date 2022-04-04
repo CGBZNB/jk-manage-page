@@ -32,6 +32,7 @@ import Login from '@/pages/LR/Login'
 import Register from '@/pages/LR/Register'
 import Test from '@/test'
 import SubjectItem from '@/pages/Home/SubjectItem'
+import SubjectOption from '@/pages/Home/SubjectOption'
 export default new VueRouter({
     //配置路由
     routes:[
@@ -50,6 +51,9 @@ export default new VueRouter({
                 {
                     path:"subject",
                     component:SubjectItem
+                },                {
+                    path:"subopt",
+                    component:SubjectOption
                 }
             ]
         },

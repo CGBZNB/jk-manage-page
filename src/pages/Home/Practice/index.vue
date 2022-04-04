@@ -85,12 +85,12 @@
         <div class="topicCon">
           <div class="topic_lx">
             <div class="borderB height149">
-              <a class="lx-link" @click="sequenpactice">
+              <a class="lx-link" @click="zxpactice">
                 <span class="topicIcon topic_zxlx"></span>
                 <p>专项练习</p>
                 <p class="topicDes">2022理论知识考试题库</p>
               </a>
-              <a class="borderL borderR lx-link" href="/ckm1/sxlx">
+              <a class="borderL borderR lx-link" @click="seqpactice">
                 <span class="topicIcon topic_sxlx"></span>
                 <p>顺序练习</p>
                 <p class="topicDes">按顺序练习做题</p>
@@ -159,9 +159,12 @@ export default {
    km2(){
       this.isActive=false;
     },
-        sequenpactice(){
+  seqpactice(){
       this.$router.push("/home/subject")
-    }
+    },
+   zxpactice(){
+      this.$router.push("/home/subopt")
+    },
   }
 };
 </script>
@@ -192,6 +195,7 @@ export default {
 .topic_lx {
   width: 704px;
   float: left;
+   border: 1px solid #f2f2f2;
 }
 
 .topic_lx .height149,
@@ -199,9 +203,7 @@ export default {
   height: 169px;
 }
 
-.borderB {
-  border-bottom: 1px solid #f2f2f2;
-}
+
 
 .borderL {
   border-left: 1px solid #f2f2f2;
@@ -286,7 +288,7 @@ export default {
   font-size: 14px;
   line-height: 28px;
   color: #999;
-  margin-top: 20px;
+
 }
 
 .ksDesCon p {
@@ -333,7 +335,7 @@ export default {
 <style >
 /**Descriptions 描述列表 样式修改*/
 .el-descriptions__header {
-  height: 30px;
+  height: 36px;
   justify-content: center;
   margin: 0 auto;
   background: #24c27d;
@@ -350,7 +352,7 @@ export default {
 .el-container {
   width: 1200px;
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .el-foote {
   height: 100px;
