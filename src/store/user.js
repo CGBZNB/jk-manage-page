@@ -1,4 +1,4 @@
-import { reqGetCode,reqPostRegister,reqGetValidate} from "@/api";
+import { reqGetCode,reqPostRegister,reqGetValidate} from "@/api/user";
 
 const state={
     code:""
