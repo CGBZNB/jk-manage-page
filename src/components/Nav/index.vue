@@ -36,7 +36,7 @@
                         <a  >考试报名</a>
                     </li>
                     <li class="nav-menu-dropdown">
-                        <a >信息认证</a>
+                        <a @click="toRenZheng">信息认证</a>
                     </li>
                     <li class="nav-menu-dropdown">
                         <a >我的信息</a>
@@ -68,6 +68,9 @@ export default {
         },
         toRegister(){
              this.$router.push('/lr/register')
+        },
+         toRenZheng(){
+             this.$router.push('/home/sfrz')
         }
     }
 }

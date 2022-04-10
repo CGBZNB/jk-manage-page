@@ -33,6 +33,7 @@ import Register from '@/pages/LR/Register'
 import Test from '@/test'
 import SubjectItem from '@/pages/Home/SubjectItem'
 import SubjectOption from '@/pages/Home/SubjectOption'
+import RenZheng from '@/pages/Home/RenZheng'
 export default new VueRouter({
     //配置路由
     routes:[
@@ -55,6 +56,10 @@ export default new VueRouter({
                 },                {
                     path:"subopt",
                     component:SubjectOption
+                },
+                {
+                    path:"sfrz",
+                    component:RenZheng
                 }
             ]
         },

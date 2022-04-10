@@ -1,9 +1,9 @@
 <template>
 <div style="height:400px">
   <el-carousel :interval="5000" arrow="always"   height="400px">
-    <el-carousel-item v-for="item in 4" :key="item" >
-    
-      <img src="https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg"/>
+    <el-carousel-item v-for="item in images" :key="item" >
+      <!-- <img src="@/assets/images/bg/bg1.jpg"/> -->
+       <img :src="item.src"/>
     </el-carousel-item>
   </el-carousel>
 </div>
@@ -14,8 +14,21 @@ export default {
     name:'Bananer',
     data(){
       return{
-
-      }
+          images:[
+            {
+              src:require('@/assets/images/bg/bg1.jpg')
+            },
+                        {
+              src:require('@/assets/images/bg/bg2.jpg')
+            },
+                        {
+              src:require('@/assets/images/bg/bg3.jpg')
+            },
+                        {
+              src:require('@/assets/images/bg/bg4.jpg')
+            },
+          ]
+    }
     }
 }
 </script>

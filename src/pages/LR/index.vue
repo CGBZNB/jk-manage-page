@@ -1,4 +1,5 @@
 <template>
+  <div class="main">
   <div class="container-header">
       
     <el-tabs style="height: 500px" :stretch="true" v-model="active1Name">
@@ -9,6 +10,7 @@
         <Register></Register>
       </el-tab-pane>
     </el-tabs>
+  </div>
   </div>
 </template>
 
@@ -34,10 +36,14 @@ export default {
 </script>
 
 <style scoped>
+.main{
+  background: url("@/assets/images/bg/bg1.jpg");
+}
 .container-header {
   width: 1000px;
-  height: 420px;
+  height: 560;
   margin: 30px auto;
+
 }
 
 </style>
