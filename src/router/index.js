@@ -49,6 +49,7 @@ export default new VueRouter({
                     component:Practice
                 },
                 {
+                   //path:"subject/:index",
                     path:"subject",
                     component:SubjectItem
                 },                {

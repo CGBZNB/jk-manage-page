@@ -18,7 +18,7 @@
               >{{subject.content}}</span
             >
           </div>
-          <div class="question-option" @click.once="xuanzhe($event)"  v-if="subject.flag==0">
+          <div class="question-option" @click.once="xuanzhe($event)" >
             <div id="256" class="op cursor" data-type="2" data-index="A" >
               <img src="@/assets/images/subject/circle.png" alt="" />
               <div class="op-content">{{subject.choiceA}}</div>
@@ -47,38 +47,6 @@
               <div class="op-content">{{subject.choiceD}}</div>
             </div>
           </div>
-            <div class="question-option" v-if="subject.flag!=0" >
-            <div id="256" class="op cursor" data-type="2" data-index="A" >
-        
-              <img src="@/assets/images/subject/true.png"  v-if="subject.answer=='A'"/>
-               <img src="@/assets/images/subject/error.png"  v-else-if="subject.myAnswer=='A'&&subject.myAnswer!=subject.answer"/>
-                <img src="@/assets/images/subject/circle.png"  v-else-if="subject.myAnswer!='A'"/>
-              <div class="op-content">{{subject.choiceA}}</div>
-            </div>
-            <div id="256" class="op cursor" data-type="2" data-index="B"  >
-              
-                           <img src="@/assets/images/subject/true.png"  v-if="subject.answer=='B'"/>
-               <img src="@/assets/images/subject/error.png"  v-else-if="subject.myAnswer=='B'&&subject.myAnswer!=subject.answer"/>
-                <img src="@/assets/images/subject/circle.png"  v-else-if="subject.myAnswer!='B'"/>
-              <div class="op-content">{{subject.choiceB}}</div>
-            </div>
-            <div id="256" class="op cursor" data-type="2" data-index="C" v-if="subject.topicType!='Judgement'">
-                
-              <img src="@/assets/images/subject/true.png"  v-if="subject.answer=='C'"/>
-               <img src="@/assets/images/subject/error.png"  v-else-if="subject.myAnswer=='C'&&subject.myAnswer!=subject.answer"/>
-                <img src="@/assets/images/subject/circle.png"  v-else-if="subject.myAnswer!='C'"/>
-              <div class="op-content">
-                {{subject.choiceC}}
-              </div>
-            </div>
-            <div id="256" class="op cursor" data-type="2" data-index="D" v-if="subject.topicType!='Judgement'">
-               
-              <img src="@/assets/images/subject/true.png"  v-if="subject.answer=='D'"/>
-               <img src="@/assets/images/subject/error.png"  v-else-if="subject.myAnswer=='D'&&subject.myAnswer!=subject.answer"/>
-                <img src="@/assets/images/subject/circle.png"  v-else-if="subject.myAnswer!='D'"/>
-              <div class="op-content">{{subject.choiceD}}</div>
-            </div>
-          </div>
         </div>
         <div class="question-img" v-if="subject.imaged==1">
           <img
@@ -92,10 +60,7 @@
 			
 				<div class="prev cursor" @click="presubject">上一题</div>
 				<div class="next cursor"  @click="nextsubject">下一题</div>
-        	<div class="cursor shoucang"  @click="shoucang"> 
-            <i class="iconfont " :class="subject.liked?'icon-shoucang1':'icon-shoucang'"></i></div>
-       
-      </div>
+			</div>
       </div>
 
     </el-container>
@@ -104,9 +69,8 @@
         <div>{{ subject.explain }}</div>
       </el-collapse-item>
       <el-collapse-item title="答题卡">
-        <!-- // -->
-          <div class="problem-list">
-          <div v-for="index in account" :key="index" class="problem-mark cursor" :class="[subjects[index-1].flag==1?'right':'',currentindex === index ? 'active' : '',subjects[index-1].flag==2?'false':'']" @click="listto(index)">
+        <div class="problem-list">
+          <div v-for="index in 1000" :key="index" class="problem-mark">
             {{ index }}
           </div>
         </div>
@@ -125,6 +89,7 @@
 </template>
 
 <script>
+
 export default {
   name: "SubjiecItem",
   data() {
@@ -132,45 +97,32 @@ export default {
       subjects: [],
       subject: {},
       account:0,
-      currentindex:1,
-      cssstyle:{
-        isright:true,
-        isactive:true,
-      },
-     
+      i: 0,
+      index:0,
+      currentindex:1
     };
   },
   created() {
-    
+    this.getsubject(1)
    //this.$store.dispatch("getSubject",this.$route.params.index)
-   this.$store.dispatch("getSubject",this.currentindex)
-    this.subject = this.$store.state.subject.subject;
+  //  this.$store.dispatch("getSubject",this.currentindex)
+  //   this.subject = this.$store.state.subject.subject;
     this.account=this.$store.state.subject.subjects.length;
-     this.subjects=this.$store.state.subject.subjects
-
   },
   methods: {
-    shoucang(){
-        this.subject.liked=!this.subject.liked
-    },
     presubject() {
-      if(this.currentindex>1){
-          this.currentindex--;
-        this.getsubject(this.currentindex)
-      }
-       
-      //this.$router.push("/home/subject/"+currentindex);
-         //this.$router.push("/home/subject/");
+      //  this.currentindex--;
+      //  this.getsubject(this.currentindex)
+      // //this.$router.push("/home/subject/"+currentindex);
+      //    this.$router.push("/home/subject/"+  this.currentindex);
+      this.$router.back()
     },
     nextsubject() {
       // this.subject = this.subjects[this.i];
       // this.i++;
-      if(this.currentindex<this.account){
-        this.currentindex++;
+   this.currentindex++;
       this.getsubject(this.currentindex)
-      }
- 
-       //this.$router.push("/home/subject/"+currentindex);
+       this.$router.push("/home/subject/"+  this.currentindex);
       
 
     
@@ -179,10 +131,6 @@ export default {
     getsubject(index){
         this.$store.dispatch("getSubject",index)
     this.subject = this.$store.state.subject.subject;
-    },
-    listto(index){
-      this.currentindex=index
-        this.getsubject(this.currentindex)
     },
     xuanzhe(e) {
 
@@ -195,28 +143,32 @@ export default {
       if(target.className=="op cursor"){
         var image=target.firstElementChild;
 
-        this.subject.myAnswer=target.getAttributeNode('data-index').value;
-          this.subject.flag=1;
-        
-        let params={
-          subject:this.subject,
-          index:this.currentindex
-        }
-
-        if(this.subject.answer==this.subject.myAnswer){
-          this.subject.flag=1;
+        let an=target.getAttributeNode('data-index').value;
+        console.log(this.subject.answer)
+        if(this.subject.answer==an){
           image.getAttributeNode('src').value="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAjVBMVEUAAAAAxVYAw1YA0WwAxFcAw1cAxFcAxFcAw1cAxFcAxVYAxVcAxFcAxVcAxV0AxFYAw1b////7/vzt+vMuznQnzHAhy2v3/fnz/Pfw+/Xk+e3f9+pH1IUTx2Lp+fCP5bVh2pZA0oA50Xw0z3gZyWeY57tn25pR1oza9ubY9eXV9eOf6L+I47CD4axZ15CYyPr+AAAAEHRSTlMAf/ML6NnTv6qlgnJSIxbyTWlgnQAAATdJREFUOMuN1WdzgzAMBmBhVsCYSCFpQhOa1aa7///n1RzDg+X3k809d7qzbAFmBE/ikLEwTriAyeRphFqiNB9lvsfQCvP8ocsCHEmQ2c7DiXhm2RVOZqWXN50tl+va1TNcSNY4P1iCga8KOxTP2Yyots3J5xKmM+7pSBesk0oYzToqm74DiGm3eyaiR7MWwGfd5tJuOCT994fpti+awwTi7ntB34YrpPvrtzGE7epMRG/K3Wv3rvYhsO7EvnR5K02HDNbd8vVTynPrDkT7E2pZy9K9/OjkVTlVOkYlj1L+IJ72RIcrGokhsTpBv4ZTx8NRl3UvNkTlDa1wEGhL6e5oR9iXYif7UQxdpK6ZksUWB0lHLm5VDR3LnZ+C++Nyf67uA2B5pLgPKfex5z5I3Uez+7B3/n38A3VoUWEG4R6kAAAAAElFTkSuQmCC"
         }else{
             image.getAttributeNode('src').value="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAbFBMVEUAAAD/TC3/TC7/TS3/VT7/TS3/TC7/TC7/TC3/TC3/TC//Ti//UDP/US7/TS3/TC3/////UzX/TzH/VTj/zMP/1Mz/1s//x77/2tP/t6r/r6L/19H/0cn/wrf/kX7/vbH/clr/lIH/gm3/gWuD7buVAAAAD3RSTlMAqH/zC+jZ07+CclIjFvLRL7PzAAABNklEQVQ4y52V65KCMAyFW26Wm6GAqIDo7r7/O24QtUmBacfzp5PpF06mTYPgKjKpkjBMlMwKsasyPQDRIS03sSgIwVIYRGsuj2FDcW5zAewo4LYSdiWpPeds0u1ru+fgUP4qMHaBcUSM3ealOefmpwGjR21OvkQw/YR6qC6G7KuT/gQpguZ+f6vKkD0Gk7l37BfjVd9wc1jIK01CFSIDQp5xu9MvrqMFZ0KCTWJp92Vh16NgTc4ljIwDJRLgZFs91XIOEhHCFtnWdg+Lox94tK01coak1opzI0K3cU0qIRl3QuS+LGdGSnbgTYfAdU7obDITBeEuM2dSKFnQpphws38nDRj80aYQKXXuyedZm/HG1Q9a8KRp4/o/Bf/H5f9c3QPAd6R8M6TcY889SL8dze5h7/37+AcfOUs9dnB0sgAAAABJRU5ErkJggg=="
-            this.subject.flag=2;
         }
- 
-              
+
        
       }
       
     },
   },
+
+beforeRouteUpdate (to, from, next) {
+   
+     console.log("1111111111111111111111")
+      this.getsubject(to.params.index)
+    next();
+  },
+  // watch: {
+  //   '$route' (to, from) {
+  //     console.log(to.params.index)
+  //      this.getsubject(to.params.index)
+  //     }
+  //   }
 
 
 
@@ -290,16 +242,6 @@ export default {
     width: 100%;
     font-size: 14px;
 }
-.shoucang{
-
-
-  margin-left: 30px;
-    border-radius: 3px;
-    display: inline-block;
-    text-align: center;
-    line-height: 36px;
-}
-
 </style>
 <style>
 .problem-list {
@@ -320,21 +262,6 @@ export default {
   line-height: 36px;
   float: left;
   position: relative;
-}
-.problem-list .problem-mark.active {
-    background: #e6e6e6;
-}
- .problem-list .problem-mark.false {
-    background: #ff4c2d;
-    color: #fff;
-}
- .problem-list .problem-mark.right {
-    background: #00c356;
-    color: #fff;
-}
-
-.cursor {
-    cursor: pointer;
 }
 </style>
 <style scoped>

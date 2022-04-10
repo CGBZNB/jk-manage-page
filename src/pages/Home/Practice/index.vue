@@ -175,8 +175,11 @@ export default {
         let params = {
           km: this.km,
         };
-    
-        (JSON.stringify(getSubject("SUBJECT")) === "null")&& await this.$store.dispatch("getSubjects", params);
+        console.log()
+        if( (JSON.stringify(getSubject("SUBJECT")) === "null")){
+            await this.$store.dispatch("getSubjects", params);
+        }
+
 
         this.$router.push("/home/subject");
       } catch {

@@ -2,7 +2,8 @@
 <div style="height:400px">
   <el-carousel :interval="5000" arrow="always"   height="400px">
     <el-carousel-item v-for="item in 4" :key="item" >
-      <h3>{{ item }}</h3>
+    
+      <img src="https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg"/>
     </el-carousel-item>
   </el-carousel>
 </div>
@@ -28,7 +29,10 @@ export default {
     text-align: center;
     margin: 0;
   }
-  
+    .el-carousel__item img {
+      width: 100%;
+      height: 400px;
+  }
   .el-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }
