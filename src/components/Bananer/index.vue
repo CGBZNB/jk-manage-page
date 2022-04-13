@@ -1,7 +1,7 @@
 <template>
 <div style="height:400px">
   <el-carousel :interval="5000" arrow="always"   height="400px">
-    <el-carousel-item v-for="item in images" :key="item" >
+    <el-carousel-item v-for="(item) in images" :key="item.src" >
       <!-- <img src="@/assets/images/bg/bg1.jpg"/> -->
        <img :src="item.src"/>
     </el-carousel-item>

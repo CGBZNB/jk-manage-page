@@ -9,10 +9,15 @@
                    </a>
             </div>
 
-              <div class="nav-header-login">
+              <div class="nav-header-login" v-if="!userName">
                     <!--<span id="getdate"></span>-->
                     <span class="btn-span"><a href="#" @click="toLogin">登录</a></span>
                     <span class="btn-span"><a href="#" @click="toRegister">注册</a></span>
+                </div>
+                 <div class="nav-header-login" v-else>
+                    <!--<span id="getdate"></span>-->
+                    <span class="btn-span username" >{{userName}}</span>
+                    <span class="btn-span"><a href="#" @click="logout">退出</a></span>
                 </div>
 
         </div>
@@ -53,6 +58,18 @@
 <script>
 export default {
     name:'Header',
+    data(){
+        return{
+            user:{},
+            isshow:true,
+            name:''
+        }
+    },
+computed:{
+    userName(){
+        return this.$store.state.user.userinfo.loginname
+    }
+},
     methods:{
         goIndex(e){
         
@@ -71,8 +88,13 @@ export default {
         },
          toRenZheng(){
              this.$router.push('/home/sfrz')
+        },
+        logout(){
+            this.$store.dispatch('logout')
+            this.$router.push('/home/index')
         }
-    }
+    },
+
 }
 </script>
 
@@ -184,6 +206,9 @@ li a:active {
 }
 
 
-
+.username{
+    font-size: 20px;
+    color: cornflowerblue;
+}
 
 </style>

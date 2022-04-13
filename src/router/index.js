@@ -1,6 +1,7 @@
 //配置路由
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import store from '@/store';
 //使用路由插件
 Vue.use(VueRouter);
 
@@ -34,7 +35,11 @@ import Test from '@/test'
 import SubjectItem from '@/pages/Home/SubjectItem'
 import SubjectOption from '@/pages/Home/SubjectOption'
 import RenZheng from '@/pages/Home/RenZheng'
-export default new VueRouter({
+import JiaXiaoRZ from '@/pages/Home/RenZheng/jiaxiao'
+
+
+
+const router =new VueRouter({
     //配置路由
     routes:[
         {
@@ -83,8 +88,40 @@ export default new VueRouter({
         },
         {
             path: "/test",
-            component: Test
+            component: JiaXiaoRZ
         },
     ]
 })
 
+router.beforeEach(async(to, from, next) => { // 路由跳转前监控(保证登录状态)
+   
+    let token=store.state.user.token
+    let name=store.state.user.userinfo.loginname
+   
+  if(token){
+      if(to.path=='/lr/login'){
+        
+          next('/')
+      }else{
+       
+       if(name){
+       
+           next()
+       }else{
+           try {
+            await store.dispatch("getuserinfo")
+            next()
+           } catch (error) {
+               store.dispatch("logout")
+               next('/lr/login')
+           }
+         
+       }
+      }
+  }else{
+    
+    next()
+  }
+
+  })
+  export default router

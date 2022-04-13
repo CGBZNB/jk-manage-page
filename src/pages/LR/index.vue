@@ -37,12 +37,15 @@ export default {
 
 <style scoped>
 .main{
-  background: url("@/assets/images/bg/bg1.jpg");
+  width: 100%;
+
+  background: url("@/assets/images/bg/bg1.jpg") center ;
 }
 .container-header {
   width: 1000px;
   height: 560;
   margin: 30px auto;
+  background-color: rgb(227, 233, 238, 0.2);
 
 }
 

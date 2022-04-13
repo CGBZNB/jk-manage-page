@@ -21,3 +21,15 @@ export const reqGetValidate=(date,type)=>requests({
     url:`/user/register/validate/${date}/${type}`,
     method:'get'
     });
+
+    //登录
+export const reqPostLogin=(data)=>requests({
+    url:'/user/login',
+    method:'post',
+    data:qs.stringify(data)
+    });
+
+    export const reqGetUserInfo=()=>requests({
+        url:'/user/userinfo',
+        method:'get',
+        });

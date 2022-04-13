@@ -26,6 +26,7 @@ const actions={
      
         console.log(params)
         let result=await reqGetSubjects(params);
+        
         if(result.code==200){
             commit("GETSUBJECTS",result.data);
             console.log(result.data)

@@ -16,6 +16,9 @@ export default {
     name:'Home',
     components:{
       Nav
+    },
+    mounted(){
+      //this.$store.dispatch("getuserinfo")
     }
 
 }

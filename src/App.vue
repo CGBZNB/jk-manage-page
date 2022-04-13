@@ -19,7 +19,14 @@ export default {
   components:{
          Header,
       Footer,
-  }
+  },
+//   created(){
+//       console.log("111111")
+//       this.$store.dispatch('getuserinfo')
+//   },updated(){
+//        console.log("2222")
+//       this.$store.dispatch('getuserinfo')
+//   }
 }
 </script>
 

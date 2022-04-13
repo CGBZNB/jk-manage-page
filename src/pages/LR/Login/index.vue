@@ -91,24 +91,24 @@
 export default {
   name: "Login",
   data() {
-    var validateAccount = (rule, value, callback) => {
-      if (value === "") {
-        return callback(new Error("账号不能为空"));
-      } else if (value === "admin") {
-        callback();
-      } else {
-        callback(new Error("请输入正确的用户名"));
-      }
-    };
-    var validatePassword = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请输入密码"));
-      } else if (value === "123456") {
-        callback();
-      } else {
-        callback(new Error("请输入正确的密码"));
-      }
-    };
+    // var validateAccount = (rule, value, callback) => {
+    //   if (value === "") {
+    //     return callback(new Error("账号不能为空"));
+    //   } else if (value === "admin") {
+    //     callback();
+    //   } else {
+    //     callback(new Error("请输入正确的用户名"));
+    //   }
+    // };
+    // var validatePassword = (rule, value, callback) => {
+    //   if (value === "") {
+    //     callback(new Error("请输入密码"));
+    //   } else if (value === "123456") {
+    //     callback();
+    //   } else {
+    //     callback(new Error("请输入正确的密码"));
+    //   }
+    // };
 
     return {
       loginFormByAccount: {
@@ -121,41 +121,51 @@ export default {
       },
       active1Name: "login", //默认显示登录页面
       active2Name: "accountlogin", //默认显示登录页面
-      rules: {
-        account: [
-          {
-            validator: validateAccount,
-            trigger: "blur",
-          },
-        ],
-        password: [
-          {
-            validator: validatePassword,
-            trigger: "blur",
-          },
-        ],
-      },
+      rules: {},
+      // rules: {
+      //   account: [
+      //     {
+      //       validator: validateAccount,
+      //       trigger: "blur",
+      //     },
+      //   ],
+      //   password: [
+      //     {
+      //       validator: validatePassword,
+      //       trigger: "blur",
+      //     },
+      //   ],
+      // },
     };
   },
   methods: {
-    goToLogin() {
-      this.$refs["loginAccount"].validate((valid) => {
-        if (valid) {
-          if (
-            this.loginForm.account != "admin" ||
-            this.loginForm.password != "123456"
-          ) {
-            this.$message.error("账号密码不正确");
-            return false;
-          } else {
-            this.$message({ message: "登陆成功", type: "success" });
-            this.$router.push("/home");
-          }
-        } else {
-          this.$message.error("登陆失败");
-          return false;
-        }
-      });
+   async goToLogin() {
+     
+      // this.$refs["loginAccount"].validate((valid) => {
+      //   if (valid) {
+      //     if (
+      //       this.loginForm.account != "admin" ||
+      //       this.loginForm.password != "123456"
+      //     ) {
+      //       this.$message.error("账号密码不正确");
+      //       return false;
+      //     } else {
+      //       this.$message({ message: "登陆成功", type: "success" });
+      //       this.$router.push("/home");
+      //     }
+      //   } else {
+      //     this.$message.error("登陆失败");
+      //     return false;
+      //   }
+      // });
+      try {
+        await this.$store.dispatch('login',this.loginFormByAccount);
+        this.$router.push('/home/index')
+      } catch (error) {
+         this.$message.error("登陆失败");
+      }
+     
+   
     },
     resetLoginForm() {
       this.$refs["loginAccount"].resetFields();
