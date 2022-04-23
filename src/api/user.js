@@ -33,3 +33,9 @@ export const reqPostLogin=(data)=>requests({
         url:'/user/userinfo',
         method:'get',
         });
+
+        export const reqUpdatePass=()=>requests({
+            url:'/user/modifypass',
+            method:'post',
+            data:qs.stringify(pararms)
+            });

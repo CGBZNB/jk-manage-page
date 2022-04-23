@@ -9,13 +9,13 @@
           <div>
             <a @click="sequenpactice"><span>顺序练习</span></a
             >
-            <a><span>随机练习</span></a
+            <a @click="randompactice"><span>随机练习</span></a
             >
           </div>
           <div>
-            <a><span>专项练习</span></a
+            <a @click="specialpactice"><span>专项练习</span></a
             >
-            <a><span>易错题练习</span></a
+            <a  @click="errpactice"><span>易错题练习</span></a
             >
           </div>
         </div>
@@ -60,9 +60,28 @@
 export default {
   name: "SubjectOption",
   methods:{
+
     sequenpactice(){
-      this.$router.push("/home/subject")
-    }
+       this.$router.push({path:"/home/subject",query:{type:1,km:1}});
+    },
+    randompactice(){
+       this.$router.push({path:"/home/subject",query:{type:0,km:1}});
+    },
+    specialpactice(){
+    this.$router.push("/home/subopt");
+    },
+     async  errpactice(){
+       try {
+        let params = {
+          flag: 2,
+        };            
+        await this.$store.dispatch("geterrsubjects", params);
+        this.$router.push({path:"/home/subject",query:{type:7,km:this.km}});
+      } catch {
+        this.$message("题目获取错误");
+      }
+    },
+
   }
 };
 </script>

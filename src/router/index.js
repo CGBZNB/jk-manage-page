@@ -35,7 +35,11 @@ import Test from '@/test'
 import SubjectItem from '@/pages/Home/SubjectItem'
 import SubjectOption from '@/pages/Home/SubjectOption'
 import RenZheng from '@/pages/Home/RenZheng'
-import JiaXiaoRZ from '@/pages/Home/RenZheng/jiaxiao'
+import BaoMing from '@/pages/Home/BaoMing'
+import YuYue from '@/pages/Home/YuYue'
+import Exam from '@/pages/Home/Exam'
+import ExamResult from '@/pages/Home/Exam/ExamResult'
+import MyInFo from '@/pages/Home/MyInFo'
 
 
 
@@ -58,14 +62,37 @@ const router =new VueRouter({
                    //path:"subject/:index",
                     path:"subject",
                     component:SubjectItem
-                },                {
+                },    
+                {
+                    path:"exam",
+                    component:Exam,
+         
+                },    
+                {
+                    path:"result",
+                    component:ExamResult,
+                },
+                        {
                     path:"subopt",
                     component:SubjectOption
                 },
                 {
                     path:"sfrz",
                     component:RenZheng
+                },
+                {
+                    path:"bm",
+                    component:BaoMing
+                },
+                {
+                    path:"yy",
+                    component:YuYue
+                },
+                {
+                    path:"myinfo",
+                    component:MyInFo
                 }
+
             ]
         },
         {
@@ -88,7 +115,7 @@ const router =new VueRouter({
         },
         {
             path: "/test",
-            component: JiaXiaoRZ
+         
         },
     ]
 })

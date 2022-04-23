@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main" style="height:500px">
   <div class="container-header">
       
     <el-tabs style="height: 500px" :stretch="true" v-model="active1Name">

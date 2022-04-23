@@ -21,7 +21,7 @@ requests.interceptors.request.use((config)=>{
 //响应拦截器
 requests.interceptors.response.use((res)=>{
 
-  console.log(res.data)
+  //console.log(res.data)
 
 
     return res.data;

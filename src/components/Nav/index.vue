@@ -32,19 +32,19 @@
                         <a   @click="goPractice">在线练习</a>
                     </li>
                       <li class="nav-menu-dropdown">
-                        <a  >模拟考试</a>
+                        <a @click="toexam" >模拟考试</a>
+                    </li>
+                    <li class="nav-menu-dropdown" >
+                        <a  @click="toyuyue">预约学车</a>
                     </li>
                     <li class="nav-menu-dropdown">
-                        <a  >预约学车</a>
-                    </li>
-                    <li class="nav-menu-dropdown">
-                        <a  >考试报名</a>
+                        <a  @click="tobaoming">考试报名</a>
                     </li>
                     <li class="nav-menu-dropdown">
                         <a @click="toRenZheng">信息认证</a>
                     </li>
                     <li class="nav-menu-dropdown">
-                        <a >我的信息</a>
+                        <a @click="tomyinfo">我的信息</a>
                     </li>
 
                 </ul>
@@ -89,9 +89,21 @@ computed:{
          toRenZheng(){
              this.$router.push('/home/sfrz')
         },
+         toyuyue(){
+             this.$router.push('/home/yy')
+        },
+          tobaoming(){
+             this.$router.push('/home/bm')
+        },
         logout(){
             this.$store.dispatch('logout')
             this.$router.push('/home/index')
+        },
+        toexam(){
+          this.$router.push('/home/exam')
+        },
+        tomyinfo(){
+             this.$router.push('/home/myinfo')
         }
     },
 

@@ -167,6 +167,7 @@ export default {
         } else {
           await this.$store.dispatch("getCode", this.registerAccount.account);
           this.registerAccount.identifyCode = this.$store.state.user.code;
+
         }
       } catch {
         this.$message("验证码错误");
@@ -183,18 +184,25 @@ export default {
         form: data,
         code: this.registerAccount.identifyCode,
       });
+        this.$message("注册成功");
+         this.$router.push('/lr/login')
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
+    
   },
 };
 </script>
 
 <style scoped lang="less">
+.main{
+  
+height: 500px;
+}
 .container {
-  width: 400px;
-
+  width: 450px;
+height: 500px;
   margin: 50px auto;
 }
 .btns {

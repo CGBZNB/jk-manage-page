@@ -65,7 +65,7 @@
                     ></el-input>
                      </el-col>
                      <el-col :span="5" :offset="3">
-                       <el-button size="small"  type="primary">发送验证码</el-button>
+                       <el-button size="small"  type="primary" @click="getcode">发送验证码</el-button>
                      </el-col>
                    
                   </el-form-item>
@@ -171,6 +171,19 @@ export default {
       this.$refs["loginAccount"].resetFields();
     },
     handleClick() {},
+      async getcode() {
+      try {
+        if (this.loginFormByPhone.phone === "") {
+          this.$message("请先输入手机号或账号");
+        } else {
+          await this.$store.dispatch("getCode", this.loginFormByPhone.phone);
+          this.registerAccount.identifyCode = this.$store.state.user.code;
+
+        }
+      } catch {
+        this.$message("验证码错误");
+      }
+    },
   },
 
 };

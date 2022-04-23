@@ -9,3 +9,21 @@ export const reqGetSubjects=(pararms)=>requests({
     method:'get',
     params:pararms
     });
+    
+    export const reqGetExam=(pararms)=>requests({
+        url:'/subject/getexam',
+        method:'get',
+        params:pararms
+        });
+
+export const reqSetSC=(pararms)=>requests({
+            url:'/subject/setsc',
+            method:'get',
+            params:pararms
+            });
+export const reqGetSC=(pararms)=>requests({
+                url:'/subject/getsc',
+                method:'get',
+                params:pararms
+                });
+    

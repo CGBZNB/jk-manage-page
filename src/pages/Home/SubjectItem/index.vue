@@ -1,11 +1,10 @@
 <template>
-  <div class="main">
+  <div class="main-item">
     <div class="subopt-container-breadcrumb">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
-        <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-        <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+        <el-breadcrumb-item><a href="/home/practice">练习选项</a></el-breadcrumb-item>
+         <el-breadcrumb-item><a href="/">在线练习</a></el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <el-container :key="subject.id">
@@ -13,7 +12,7 @@
         <div class="question-body">
           <div class="question-title">
             <span class="choose">单选题</span>
-            <div class="mark">{{subject.id}}/{{account}}、</div>
+            <div class="mark">{{currentindex}}/{{account}}、</div>
             <span style="display: inline" class="exam-question"
               >{{subject.content}}</span
             >
@@ -80,13 +79,12 @@
             </div>
           </div>
         </div>
-        <div class="question-img" v-if="subject.imaged==1">
+        <div class="question-img" >
           <img
             :src="subject.imgStr"
             alt=""
-            data-src="https://wos.58cdn.com.cn/XyVuTsRqXyf/question/11121.png"
           />
-          <div class="look cursor">查看大图</div>
+         
         </div>
       <div class="question-btns">
 			
@@ -125,6 +123,7 @@
 </template>
 
 <script>
+import {reqSetSC} from '@/api/subject'
 export default {
   name: "SubjiecItem",
   data() {
@@ -136,22 +135,36 @@ export default {
       cssstyle:{
         isright:true,
         isactive:true,
+        km:this.$route.query.km,
+        type:this.$route.query.type
       },
      
     };
   },
-  created() {
-    
+  mounted() {
+ 
+   this.km=this.$route.query.km
+   this.type=this.$route.query.type
    //this.$store.dispatch("getSubject",this.$route.params.index)
-   this.$store.dispatch("getSubject",this.currentindex)
+   let data={
+     km:this.km,
+     type:this.type
+   }
+   this.$store.dispatch("getItems",data)
     this.subject = this.$store.state.subject.subject;
-    this.account=this.$store.state.subject.subjects.length;
-     this.subjects=this.$store.state.subject.subjects
+    this.account=this.$store.state.subject.items.length;
+     this.subjects=this.$store.state.subject.items
+     this.currentindex==this.$store.state.subject.index
 
   },
   methods: {
     shoucang(){
         this.subject.liked=!this.subject.liked
+                    let params={
+              sid:this.subject.id,
+              flag:1
+            }
+        reqSetSC(params)
     },
     presubject() {
       if(this.currentindex>1){
@@ -167,17 +180,16 @@ export default {
       // this.i++;
       if(this.currentindex<this.account){
         this.currentindex++;
-      this.getsubject(this.currentindex)
+       this.getsubject(this.currentindex)
       }
- 
-       //this.$router.push("/home/subject/"+currentindex);
-      
-
-    
-       
     },
     getsubject(index){
-        this.$store.dispatch("getSubject",index)
+         let data={
+     km:this.km,
+     type:this.type,
+     index:index
+   }
+        this.$store.dispatch("getSubject",data)
     this.subject = this.$store.state.subject.subject;
     },
     listto(index){
@@ -209,6 +221,11 @@ export default {
         }else{
             image.getAttributeNode('src').value="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAbFBMVEUAAAD/TC3/TC7/TS3/VT7/TS3/TC7/TC7/TC3/TC3/TC//Ti//UDP/US7/TS3/TC3/////UzX/TzH/VTj/zMP/1Mz/1s//x77/2tP/t6r/r6L/19H/0cn/wrf/kX7/vbH/clr/lIH/gm3/gWuD7buVAAAAD3RSTlMAqH/zC+jZ07+CclIjFvLRL7PzAAABNklEQVQ4y52V65KCMAyFW26Wm6GAqIDo7r7/O24QtUmBacfzp5PpF06mTYPgKjKpkjBMlMwKsasyPQDRIS03sSgIwVIYRGsuj2FDcW5zAewo4LYSdiWpPeds0u1ru+fgUP4qMHaBcUSM3ealOefmpwGjR21OvkQw/YR6qC6G7KuT/gQpguZ+f6vKkD0Gk7l37BfjVd9wc1jIK01CFSIDQp5xu9MvrqMFZ0KCTWJp92Vh16NgTc4ljIwDJRLgZFs91XIOEhHCFtnWdg+Lox94tK01coak1opzI0K3cU0qIRl3QuS+LGdGSnbgTYfAdU7obDITBeEuM2dSKFnQpphws38nDRj80aYQKXXuyedZm/HG1Q9a8KRp4/o/Bf/H5f9c3QPAd6R8M6TcY889SL8dze5h7/37+AcfOUs9dnB0sgAAAABJRU5ErkJggg=="
             this.subject.flag=2;
+            let params={
+              sid:this.subject.id,
+              flag:2
+            }
+        reqSetSC(params)
         }
  
               
@@ -272,7 +289,6 @@ export default {
 }
 
 .question-content .question-img {
-  display: none;
   position: absolute;
   right: 20px;
   top: 60px;
@@ -289,6 +305,17 @@ export default {
     display: inline-block;
     width: 100%;
     font-size: 14px;
+}
+.question-content .question-btns .next, .question-content .question-btns .prev, .question-content .question-btns .submit {
+    width: 120px;
+    height: 36px;
+    background: #00c356;
+    border-radius: 3px;
+    display: inline-block;
+    text-align: center;
+    line-height: 36px;
+  margin-left: 10px;
+    color: #fff;
 }
 .shoucang{
 
@@ -394,7 +421,7 @@ export default {
   text-align: left;
   margin-bottom: 0;
 }
-.main {
+.main-item {
   width: 1200px;
   margin: 20px auto;
   text-align: left;

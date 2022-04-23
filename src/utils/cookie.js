@@ -3,8 +3,8 @@ export const setSubject=(data)=>{
   localStorage.setItem("SUBJECT",data);
 }
 
-export const getSubject=(name)=>{
-  return JSON.parse(localStorage.getItem(name))
+export const getSubject=()=>{
+  return JSON.parse(localStorage.getItem("SUBJECT"))
 }
 
 export const setToken=(token)=>{

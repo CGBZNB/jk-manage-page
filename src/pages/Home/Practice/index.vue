@@ -102,24 +102,24 @@
                   <p>顺序练习</p>
                   <p class="topicDes">按顺序练习做题</p>
                 </a>
-                <a class="lx-link" href="/ckm1/sjlx">
+                <a class="lx-link" @click="randompactice">
                   <span class="topicIcon topic_sjlx"></span>
                   <p>随机练习</p>
                   <p class="topicDes">所有法规一个不漏</p>
                 </a>
               </div>
               <div>
-                <a class="lx-link" href="/ckm1/zjlx">
+                <a class="lx-link" >
                   <span class="topicIcon topic_zjlx"></span>
                   <p>章节练习</p>
                   <p class="topicDes">按照法规章节逐步分类</p>
                 </a>
-                <a class="borderL borderR lx-link" href="/ckm1/yct">
+                <a class="borderL borderR lx-link" @click="errpactice">
                   <span class="topicIcon topic_yct"></span>
                   <p>易错题</p>
                   <p class="topicDes">准确把握考试难点</p>
                 </a>
-                <a class="lx-link nozgz" href="/ckm1/zyt">
+                <a class="lx-link nozgz" @click="scpactice">
                   <span class="topicIcon topic_zyt"></span>
                   <p>收藏题</p>
                   <p class="topicDes">收藏自己格外注意的题目</p>
@@ -127,7 +127,7 @@
               </div>
             </div>
             <div class="topic_ks borderL">
-              <a class="lx-link" href="/ckm1/mnks">
+              <a class="lx-link" @click="toexam">
                 <span class="topicIcon topic_mnks"></span>
                 <p>模拟考试</p>
                 <p class="topicDes">模拟在线真实考试</p>
@@ -181,15 +181,59 @@ export default {
         }
 
 
-        this.$router.push("/home/subject");
+        this.$router.push({path:"/home/subject",query:{type:1,km:this.km}});
       } catch {
         console.log("err");
         this.$message("题目获取错误");
       }
     },
+    async randompactice(){
+      try {
+        let params = {
+          km: this.km,
+        };
+        console.log()
+        if( (JSON.stringify(getSubject("SUBJECT")) === "null")){
+            await this.$store.dispatch("getSubjects", params);
+        }
+
+
+        this.$router.push({path:"/home/subject",query:{type:0,km:this.km}});
+      } catch {
+        console.log("err");
+        this.$message("题目获取错误");
+      }
+
+    },
     zxpactice() {
       this.$router.push("/home/subopt");
     },
+  async  errpactice(){
+       try {
+        let params = {
+          flag: 2,
+        };            
+        await this.$store.dispatch("geterrsubjects", params);
+        this.$router.push({path:"/home/subject",query:{type:7,km:this.km}});
+      } catch {
+        this.$message("题目获取错误");
+      }
+    },
+      async  scpactice(){
+       try {
+        let params = {
+          flag: 1,
+        };     
+        await this.$store.dispatch("getscsubjects", params);
+        this.$router.push({path:"/home/subject",query:{type:8,km:this.km}});
+      } catch {
+        this.$message("题目获取错误");
+      }
+    },
+     toexam(){
+          this.$router.push('/home/exam')
+        },
+
   },
 };
 </script>
