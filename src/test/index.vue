@@ -34,7 +34,7 @@
                 :show-password='true'
                 v-model="loginForm.password"
                 prefix-icon="el-icon-lock"
-                placeholder="请输入密码"
+                placeholder="请输入密码gdfg"
               ></el-input>
             </el-form-item>
                 </el-col>
